@@ -13,3 +13,37 @@ Exemplo de entrada
 string = “BBBBBBBBBBBBBAACCCDD”
 “9B4B2A3C2D”
 '''
+
+def comprimir_string_tradicional(frase):
+    if not frase:
+        return "A frase de entrada não pode ser vazia."
+
+    resultado_comprimido = ""
+    contagem_caracteres = 1
+
+    for i in range(1, len(frase)):
+        caractere_atual = frase[i]
+        caractere_anterior = frase[i - 1]
+
+        if caractere_atual == caractere_anterior:
+            contagem_caracteres += 1
+        else:
+            if contagem_caracteres > 1:
+                resultado_comprimido += str(contagem_caracteres) + caractere_anterior
+            else:
+                resultado_comprimido += caractere_anterior
+
+            contagem_caracteres = 1
+
+    # Lidar com o último conjunto de caracteres
+    if contagem_caracteres > 1:
+        resultado_comprimido += str(contagem_caracteres) + frase[-1]
+    else:
+        resultado_comprimido += frase[-1]
+
+    return resultado_comprimido
+
+# Solicitar entrada do usuário
+frase_usuario = input("Digite a frase que deseja codificar: ")
+resultado_codificado = comprimir_string_tradicional(frase_usuario)
+print(f"Resultado codificado: {resultado_codificado}")
