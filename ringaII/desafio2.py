@@ -27,3 +27,50 @@ uniformes_laranjas = [162, 181, 151, 160, 170]
 Exemplo de saída:
 true
 '''
+
+
+import random
+
+def gerar_alturas_aleatorias(tamanho_turma, altura_min, altura_max):
+    alturas = []
+    for _ in range(tamanho_turma):
+        alturas.append(random.randint(altura_min, altura_max))
+    return alturas
+
+def verificar_cor_uniformes_na_fotografia(alunos_uniformes_pretos, alunos_uniformes_laranjas):
+    # Verificar se os arrays de altura têm o mesmo tamanho
+    if len(alunos_uniformes_pretos) != len(alunos_uniformes_laranjas):
+        print("Os arrays de altura devem ter o mesmo tamanho.")
+        return False
+
+    # Ordenar as alturas em ordem crescente para cada turma
+    alunos_uniformes_pretos.sort()
+    alunos_uniformes_laranjas.sort()
+
+    for i in range(len(alunos_uniformes_pretos)):
+        altura_preto = alunos_uniformes_pretos[i]
+        altura_laranja = alunos_uniformes_laranjas[i]
+
+        if altura_preto >= altura_laranja:
+            return False
+
+    # Se a condição for atendida para todos os pares, retorna True
+    return True
+
+# Definindo o tamanho das turmas e os intervalos de altura
+tamanho_turma_pretos = 5
+tamanho_turma_laranjas = 5
+altura_min_pretos, altura_max_pretos = 138, 188
+altura_min_laranjas, altura_max_laranjas = 137, 185
+
+# Gerando alturas aleatórias para cada turma
+alunos_uniformes_pretos = gerar_alturas_aleatorias(tamanho_turma_pretos, altura_min_pretos, altura_max_pretos)
+alunos_uniformes_laranjas = gerar_alturas_aleatorias(tamanho_turma_laranjas, altura_min_laranjas, altura_max_laranjas)
+
+# Chamada da função e impressão do resultado
+resultado = verificar_cor_uniformes_na_fotografia(alunos_uniformes_pretos, alunos_uniformes_laranjas)
+
+# Imprimindo os resultados
+print("Alturas dos alunos com uniformes pretos:", alunos_uniformes_pretos)
+print("Alturas dos alunos com uniformes laranjas:", alunos_uniformes_laranjas)
+print("Resultado da fotografia:", resultado)
